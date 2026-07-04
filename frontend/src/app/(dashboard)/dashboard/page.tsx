@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { RevenueTrend, LeadFunnel } from '@/components/dashboard/KPICharts';
 import { apiClient } from '@/lib/api/client';
 
@@ -57,6 +58,7 @@ function StatCard({ label, value, trend, trendUp, color }: { label: string; valu
 }
 
 export default function DashboardPage() {
+  const router = useRouter();
   const [data, setData] = useState<any>(DEMO_DATA);
   const [loading, setLoading] = useState(true);
 
@@ -84,7 +86,7 @@ export default function DashboardPage() {
           <h1 className="text-2xl font-bold text-txt-primary">Executive Dashboard</h1>
           <p className="text-txt-muted text-sm mt-0.5">Real-time business intelligence powered by your AI Executive Crew</p>
         </div>
-        <button className="btn-primary flex items-center gap-2 text-sm">
+        <button onClick={() => router.push('/analysis')} className="btn-primary flex items-center gap-2 text-sm">
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
           </svg>
