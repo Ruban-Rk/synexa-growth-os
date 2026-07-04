@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from app.api.v1.auth import router as auth_router
 from app.api.v1.business import router as business_router
 from app.api.v1.analysis import router as analysis_router
@@ -9,6 +10,14 @@ from app.api.v1.analytics import router as analytics_router
 from app.api.v1.documents import router as documents_router
 
 app = FastAPI(title="Synexa Growth OS API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000", "https://*.vercel.app"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 import time
 import uuid
 from starlette.middleware.base import BaseHTTPMiddleware
