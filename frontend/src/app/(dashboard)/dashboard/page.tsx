@@ -7,10 +7,14 @@ import { apiClient } from '@/lib/api/client';
 
 const DEMO_DATA = {
   metrics: {
-    business_health: { value: 'Strong', trend: '+12%' },
-    growth_score: { value: 74, trend: '+8 pts' },
+    business_health: { value: '92/100', trend: '+12%' },
+    growth_score: { value: '74/100', trend: '+8 pts' },
     revenue_opportunity: { value: '24,500', trend: '+18%' },
-    risk_alerts: { value: 2, trend: '-1' },
+    lead_score: { value: '88/100', trend: '+5%' },
+    customer_health: { value: 'Strong', trend: '+2%' },
+    market_readiness: { value: 'High', trend: 'Stable' },
+    risk_alerts: { value: '2', trend: '-1' },
+    ai_recommendations: { value: '4 Active', trend: 'New' },
     executive_summary: 'The business is showing strong revenue momentum with consistent week-over-week lead volume. Marketing conversion has improved, though two supply chain risks require attention before Q3 campaign launch.',
   },
   charts: {
@@ -102,8 +106,12 @@ export default function DashboardPage() {
       ) : (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
           <StatCard label="Business Health" value={metrics.business_health.value} trend={metrics.business_health.trend} trendUp={true} color="text-emerald-400" />
-          <StatCard label="Growth Score" value={`${metrics.growth_score.value}/100`} trend={metrics.growth_score.trend} trendUp={true} color="text-brand" />
+          <StatCard label="Growth Score" value={metrics.growth_score.value} trend={metrics.growth_score.trend} trendUp={true} color="text-brand" />
           <StatCard label="Revenue Opportunity" value={`$${metrics.revenue_opportunity.value}`} trend={metrics.revenue_opportunity.trend} trendUp={true} color="text-txt-primary" />
+          <StatCard label="Lead Score" value={metrics.lead_score.value} trend={metrics.lead_score.trend} trendUp={true} color="text-emerald-400" />
+          <StatCard label="Customer Health" value={metrics.customer_health.value} trend={metrics.customer_health.trend} trendUp={true} color="text-emerald-400" />
+          <StatCard label="Market Readiness" value={metrics.market_readiness.value} trend={metrics.market_readiness.trend} trendUp={true} color="text-txt-primary" />
+          <StatCard label="AI Recommendations" value={metrics.ai_recommendations.value} trend={metrics.ai_recommendations.trend} trendUp={true} color="text-brand" />
           <StatCard label="Risk Alerts" value={`${metrics.risk_alerts.value} Warnings`} trend={metrics.risk_alerts.trend} trendUp={false} color="text-red-400" />
         </div>
       )}
