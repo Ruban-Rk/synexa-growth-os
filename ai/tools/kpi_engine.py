@@ -35,6 +35,7 @@ class KPIEngine:
             "risk_alerts": {"value": risks, "trend": "down" if risks < 2 else "up", "confidence": 0.99},
             "market_readiness": {"value": "Ready" if health_score > 60 else "Not Ready", "trend": "up", "confidence": 0.85},
             "customer_health": {"value": cust_health, "trend": "up", "confidence": 0.92},
+            "ai_recommendations": {"value": "4 Active", "trend": "New", "confidence": 0.95},
             "executive_summary": f"Calculated based on {len(kpis)} active KPIs. Health is {health_score}/100."
         }
     
