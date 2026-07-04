@@ -5,6 +5,21 @@ class KPIEngine:
         leads = kpis.get("leads", 0)
         retention = kpis.get("customer_retention", 0.5)
         churn = kpis.get("churn_rate", 0.1)
+        
+        # Try to load real-time dataset
+        try:
+            import pandas as pd
+            import os
+            data_path = os.path.join(os.path.dirname(__file__), '../../data/products.csv')
+            if os.path.exists(data_path):
+                df = pd.read_csv(data_path)
+                # Compute real metrics from dataset
+                revenue = (df['base_price'] * df['actual_demand']).sum()
+                leads = df['forecasted_demand'].sum()
+                retention = df['customer_satisfaction_score'].mean() / 5.0 # normalized to 0-1
+                churn = df['channel_return_rate'].mean()
+        except Exception as e:
+            print(f"Dataset load failed: {e}")
 
         # 1. Business Health Score (0-100)
         health_score = min(100, max(0, int((retention * 100) + (revenue / 1000) - (churn * 200))))
